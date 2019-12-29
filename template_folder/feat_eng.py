@@ -9,10 +9,9 @@ def bag_of_words():
                            max_features = 5000
                         )
 
-def tfidf():
-	return TfidfVectorizer(max_df=0.5, 
-                           min_df=2, 
-                           stop_words='english', 
+def tfidf(max_df,min_df):
+	return TfidfVectorizer(max_df=max_df, 
+                           min_df=min_df, 
                            lowercase=True, 
                            use_idf=True,
                            norm=u'l2', 
