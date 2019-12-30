@@ -9,6 +9,39 @@ import pandas as pd
 import numpy as np
 
 
+def calculate_coherence(w2v_model, term_rankings):
+    '''
+    takes:
+    -w2v model
+    -term rankings (calculated by top_term)
+    returns:
+    -ratio of overall coherence/number of term rankings
+    '''
+    overall_coherence = 0.0
+    for topic_index in range(len(term_rankings)):
+        # check each pair of terms
+        pair_scores = [w2v_model.wv.similarity(p[0],p[1]) for p in combinations(term_rankings[topic_index],2)]
+        topic_score = sum(pair_scores) / len(pair_scores)
+        overall_coherence += topic_score
+        
+    # get the mean score across all topics
+    return overall_coherence / len(term_rankings)
+
+#top terms for each topic
+
+def top_term(all_terms, H, topic_index, top):
+    '''
+    takes: 
+    -tf_idf feature names (terms)
+    -NMF factorization matrix (H) - when multiplied by W returns V
+    -the number of topics in the input
+    -# of top terms to use
+    returns:
+    -top terms for specified parameters
+    '''
+    return [all_terms[term_index] for term_index in np.argsort(H[topic_index,:])[::-1][0:top]]
+
+
 # Linking words to topics
 def word_topic(vec_data, unsuper_method, terms):
 
@@ -104,7 +137,7 @@ def lsa_pipeline(vec_data, ntopics, n_top_words, vectorizor):
 	return df 
 
 
-def nmf_pipeline(vec_data, ntopics, n_top_words, vectorizor):
+def nmf_pipeline(vec_data, ntopics, n_top_words, vectorizor, init='custom'):
 	'''
 	takes:
 		vec_data --> vectorized data ex: tfidf, bow
@@ -115,8 +148,7 @@ def nmf_pipeline(vec_data, ntopics, n_top_words, vectorizor):
 	'''
 
 	#instantiate LDA 
-	nmf = NMF(alpha=0.0, 
-          init='nndsvdar', # how starting value are calculated
+	nmf = NMF(init='nndsvdar', # how starting value are calculated
           l1_ratio=0.0, # Sets whether regularization is L2 (0), L1 (1), or a combination (values between 0 and 1)
           max_iter=200, # when to stop even if the model is not converging (to prevent running forever)
           n_components=ntopics, 
