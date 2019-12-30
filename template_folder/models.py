@@ -10,6 +10,14 @@ import pandas as pd
 import numpy as np
 
 
+def get_top_snippets( all_snippets, W, topic_index, top ):
+    # reverse sort the values to sort the indices
+    top_indices = np.argsort( W[:,topic_index] )[::-1]
+    # now get the snippets corresponding to the top-ranked indices
+    
+    return [all_snippets[doc_index] for doc_index in top_indices[0:top]]
+
+
 def calculate_coherence(w2v_model, term_rankings):
     '''
     takes:
