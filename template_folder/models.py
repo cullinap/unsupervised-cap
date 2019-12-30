@@ -5,6 +5,7 @@ from sklearn.preprocessing import Normalizer
 from sklearn.decomposition import LatentDirichletAllocation as LDA
 from sklearn.decomposition import NMF
 
+from itertools import combinations
 import pandas as pd
 import numpy as np
 
