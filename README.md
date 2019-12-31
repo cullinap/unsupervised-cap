@@ -9,3 +9,5 @@ The project will happen in multiple stages consisting of 1) preprocess the text,
 references/inspiration:<br>
 -Benedek Rozemberczaki's boosted factorization: https://github.com/benedekrozemberczki/BoostedFactorization <br>
 -Derek Greene's excellent github & papers: https://github.com/derekgreene 
+
+![Alt text](/bokeh_plot.png?raw=true "Optional Title")
