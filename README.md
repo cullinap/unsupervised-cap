@@ -1,4 +1,4 @@
-he data comes from the following link: https://www.kaggle.com/rmisra/news-category-dataset. 
+the data comes from the following link: https://www.kaggle.com/rmisra/news-category-dataset. 
 
 Overall the dataset contains over 200K headlines from the Huffington Post between 2012 and 2018. The dataset has six columns that capture the category, headlines, author, link, description, and date the article was published. Overall there are 40 different categories ranging from politics to education. In general the top categories are politics, wellness, and entertainment. For the purposes of this notebook we won't be using the other columnns but it is worthy noting that each date may have more than one headline. More information about the data can be found below this abstract.
 
